@@ -1,0 +1,114 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    padding: 0; /* Remove padding from body */
+    margin: 0;  /* Ensure no margin on body */
+}
+
+/* Header styles */
+header {
+    background-color: #4a90e2; /* Bright blue */
+    padding: 0; /* Remove padding from header */
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    margin: 0; /* Remove margin from ul */
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #357abd; /* Darker blue */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    margin: 20px auto;
+    border: 2px solid #4a90e2; /* Blue border */
+}
+
+/* Profile Photo */
+.profile-photo {
+    position: relative;
+    text-align: center;
+}
+
+.profile-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #4a90e2; /* Blue border around photo */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+/* Photo Buttons */
+.photo-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 350px;
+}
+
+.photo-btn {
+    background-color: #e94e77; /* Pinkish color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin: 0 5px;
+}
+
+.photo-btn:hover {
+    background-color: #d43f65; /* Darker pink */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Info */
+.profile-info {
+    text-align: center;
+}
+
+.profile-info h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #4a90e2, #50e3c2); /* Gradient text */
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.profile-info p {
+    font-size: 18px;
+    color: #666;
+}

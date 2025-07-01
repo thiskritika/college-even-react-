@@ -1,0 +1,121 @@
+/* Ensure smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Basic reset and layout setup */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Container for photo details */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Photo details styling */
+.photo-details {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto; /* Center the photo-details */
+}
+
+/* Image styling */
+.photo-details img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Hover effect for the entire photo container */
+.photo-details:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* User profile info */
+.user-profile-info {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+/* Profile photo */
+.user-profile-photo {
+    width: 60px; /* Adjusted size for better visual */
+    height: 60px; /* Adjusted size for better visual */
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px; /* Space between photo and text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* User name and course */
+.user-name {
+    font-size: 20px; /* Adjusted size for better readability */
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.user-course {
+    font-size: 16px; /* Adjusted size for better readability */
+    color: #777;
+    margin-top: 5px; /* Added space between name and course */
+}
+
+/* Description section */
+.description {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+
+.description p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    color: #555;
+}
+
+/* Responsive Design for larger screens */
+@media (min-width: 768px) {
+    .photo-details {
+        padding: 30px; /* Increased padding for larger screens */
+    }
+
+    .user-profile-photo {
+        width: 80px; /* Larger profile photo */
+        height: 80px; /* Larger profile photo */
+    }
+
+    .user-name {
+        font-size: 24px; /* Larger font size for name */
+    }
+
+    .user-course {
+        font-size: 18px; /* Larger font size for course */
+    }
+}

@@ -1,0 +1,177 @@
+/* Mobile First */
+body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+header {
+    background-color: #4a90e2; /* Blue background similar to profile.css */
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none !important;
+    color: white; /* White text color */
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Border radius for similar style */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #357abd; /* Darker blue for hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.main-content {
+    padding: 20px;
+    margin-top: 80px; /* Adjust for fixed header height */
+}
+
+h1 {
+    margin: 0 0 20px;
+    color: black;
+    font-weight: bold;
+}
+
+#photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.photo-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(50% - 15px); /* Adjusted width for 2 columns on mobile */
+    position: relative;
+}
+
+.photo-card img {
+    width: 100%;
+    height: auto;
+    max-height: 150px; 
+    object-fit: cover; 
+}
+
+.photo-info {
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+button {
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    color: #fff;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Edit button (on the left) */
+.edit-btn {
+    background-color: #28a745;
+    right: 60px;
+}
+
+.edit-btn:hover {
+    background-color: #218838;
+}
+
+/* Delete button (on the right) */
+.delete-btn {
+    background-color: #eb6464;
+}
+
+.delete-btn:hover {
+    background-color: #c12d2d;
+}
+
+button i {
+    font-size: 1rem;
+}
+
+#editModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#editModal form {
+    display: flex;
+    flex-direction: column;
+}
+
+#editModal form input, #editModal form button {
+    margin-bottom: 10px;
+}
+
+#editModal form button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#editModal form button:hover {
+    background-color: #218838;
+}
+
+#editModal form #cancelEdit {
+    background-color: #dc3545;
+}
+
+#editModal form #cancelEdit:hover {
+    background-color: #c82333;
+}
