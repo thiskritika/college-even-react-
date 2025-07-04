@@ -45,14 +45,14 @@ const PhotoDetails = () => {
       <div className="flex flex-col items-center gap-4">
         <img
           src={photoUrl}
-          alt="Photo"
+          alt=""
           className="w-full max-h-[500px] object-cover rounded"
         />
 
         <div className="flex items-center gap-4 mt-4">
           <img
             src={profilePhoto}
-            alt="User Profile"
+            alt=""
             className="w-16 h-16 rounded-full border"
           />
           <div>

@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +29,7 @@ const Login = () => {
     if (token) {
       navigate('/dashboard');
     }
-  }, []);
+  }, [navigate]); // Added navigate to dependency array
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">

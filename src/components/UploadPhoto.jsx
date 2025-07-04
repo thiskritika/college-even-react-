@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // Removed unused useRef
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const UploadPhoto = () => {
   const [profilePhoto, setProfilePhoto] = useState('http://localhost:5000/default-profile-photo.jpg');
   const navigate = useNavigate();
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
@@ -27,7 +27,7 @@ const UploadPhoto = () => {
       console.error('Error fetching user:', err.message);
       alert('Failed to load user data.');
     }
-  };
+  }, [navigate]);
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token');
@@ -76,42 +76,37 @@ const UploadPhoto = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, []);
+  }, [fetchUserProfile]); // Added fetchUserProfile to dependency array
 
   return (
     <div>
-      {/* Header */}
       <header className="bg-blue-500 text-white py-4 font-bold">
         <nav className="flex justify-between items-center px-6">
           <ul className="flex items-center gap-6">
             <li>
               <a href="/dashboard" className="flex items-center gap-2 hover:underline">
-                
                 Dashboard
               </a>
             </li>
             <li>
               <a href="/upload" className="flex items-center gap-2 hover:underline">
-                
                 Upload Photos
               </a>
             </li>
             <li>
               <a href="/view" className="flex items-center gap-2 hover:underline">
-                
                 View Your Photos
               </a>
             </li>
             <li>
               <button onClick={handleLogout} className="flex items-center gap-2 text-red-400 hover:underline">
-                
                 Logout
               </button>
             </li>
             <li onClick={() => navigate('/profile')} className="cursor-pointer">
               <img
                 src={profilePhoto}
-                alt="User Profile"
+                alt="User"
                 className="w-10 h-10 rounded-full ml-4"
               />
             </li>
@@ -119,7 +114,6 @@ const UploadPhoto = () => {
         </nav>
       </header>
 
-      {/* Upload Form */}
       <main className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
         <h1 className="text-2xl font-bold mb-6 text-center">Upload a Photo</h1>
 
