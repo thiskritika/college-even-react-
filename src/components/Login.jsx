@@ -29,7 +29,7 @@ const Login = () => {
     if (token) {
       navigate('/dashboard');
     }
-  }, [navigate]);
+  }, [navigate]); // Fixed: Added navigate to dependency array
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
