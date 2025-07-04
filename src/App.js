@@ -25,9 +25,9 @@ const App = () => {
     <Router>
       <div className="min-h-screen bg-gray-100 text-gray-900 font-sans">
         <Routes>
-          /* Public Route */
+          {/* Public Route */}
           <Route path="/login" element={<Login />} />
-          /* Protected Routes */
+          {/* Protected Routes */}
           <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} /> 
           <Route path="/register" element={<Register />} />
           <Route path="/ViewAllPhotos" element={isAuthenticated ? <ViewAllPhotos /> : <Navigate to="/login" />} />
