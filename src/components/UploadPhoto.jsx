@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // Removed unused useRef
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -76,7 +76,7 @@ const UploadPhoto = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, [fetchUserProfile]); // Added fetchUserProfile to dependency array
+  }, [fetchUserProfile]);
 
   return (
     <div>

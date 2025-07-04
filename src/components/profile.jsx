@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,9 +7,9 @@ const Profile = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef();
 
-  const redirectToLogin = () => navigate('/login');
+  const redirectToLogin = useCallback(() => navigate('/login'), [navigate]);
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return redirectToLogin();
 
@@ -22,7 +22,7 @@ const Profile = () => {
       console.error('Error fetching user:', err.message);
       alert('Failed to load user data.');
     }
-  };
+  }, [redirectToLogin]);
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token');
@@ -85,7 +85,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, []);
+  }, [fetchUserProfile]);
 
   if (!user) return <div className="text-center mt-10 text-lg font-semibold">Loading...</div>;
 
@@ -100,28 +100,24 @@ const Profile = () => {
           <ul className="flex space-x-6 items-center text-sm md:text-base">
             <li>
               <a href="/dashboard" className="flex items-center gap-2 hover:underline">
-                
                 Dashboard
               </a>
             </li>
             <li>
               <a href="/upload" className="flex items-center gap-2 hover:underline">
-                
                 Upload Photos
               </a>
             </li>
             <li>
               <a href="/view" className="flex items-center gap-2 hover:underline">
-                
                 View Your Photos
               </a>
             </li>
             <li>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2  hover:underline"
+                className="flex items-center gap-2 hover:underline"
               >
-                
                 Logout
               </button>
             </li>
@@ -134,7 +130,7 @@ const Profile = () => {
           <div className="flex flex-col items-center">
             <img
               src={profilePhotoSrc}
-              alt="Profile"
+              alt=""
               className="w-40 h-40 object-cover rounded-full border-4 border-blue-400 shadow-md"
             />
             <div className="mt-4 flex flex-col gap-3 w-full">
