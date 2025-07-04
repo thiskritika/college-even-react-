@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,11 +7,11 @@ const ViewAllPhotos = () => {
   const [profilePhoto, setProfilePhoto] = useState('http://localhost:5000/default-profile-photo.jpg');
   const navigate = useNavigate();
 
-  const redirectToLogin = () => {
+  const redirectToLogin = useCallback(() => {
     navigate('/login');
-  };
+  }, [navigate]);
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return redirectToLogin();
 
@@ -30,9 +30,9 @@ const ViewAllPhotos = () => {
       console.error('Error fetching user:', err);
       alert('Failed to load user data.');
     }
-  };
+  }, [redirectToLogin]);
 
-  const fetchAllPhotos = async () => {
+  const fetchAllPhotos = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return redirectToLogin();
 
@@ -46,7 +46,7 @@ const ViewAllPhotos = () => {
       console.error('Error fetching photos:', err);
       alert('Failed to load photos.');
     }
-  };
+  }, [redirectToLogin]);
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token');
@@ -71,28 +71,25 @@ const ViewAllPhotos = () => {
   useEffect(() => {
     fetchUserProfile();
     fetchAllPhotos();
-  }, []);
+  }, [fetchUserProfile, fetchAllPhotos]);
 
   return (
     <div>
-      <header className="bg-blue-500 text-white shadow  font-bold">
+      <header className="bg-blue-500 text-white shadow font-bold">
         <nav className="flex justify-between items-center px-6 py-4">
           <ul className="flex space-x-6 items-center">
             <li>
               <a href="/dashboard" className="flex items-center gap-2 hover:underline">
-
                 Dashboard
               </a>
             </li>
             <li>
               <a href="/upload" className="flex items-center gap-2 hover:underline">
-
                 Upload Photos
               </a>
             </li>
             <li>
               <a href="/view" className="flex items-center gap-2 hover:underline">
-
                 View Your Photos
               </a>
             </li>
@@ -101,7 +98,6 @@ const ViewAllPhotos = () => {
                 onClick={handleLogout}
                 className="flex items-center gap-2 hover:underline text-white-400"
               >
-
                 Logout
               </button>
             </li>
@@ -112,7 +108,7 @@ const ViewAllPhotos = () => {
           >
             <img
               src={profilePhoto}
-              alt="User Profile"
+              alt="User"
               className="w-10 h-10 rounded-full"
             />
           </div>
@@ -132,7 +128,7 @@ const ViewAllPhotos = () => {
             return (
               <div key={photo._id} className="bg-white rounded shadow overflow-hidden">
                 <a href={`/photoDetails?id=${photo._id}`}>
-                  <img src={photoUrl} alt="Photo" className="w-full h-48 object-cover" />
+                  <img src={photoUrl} alt="" className="w-full h-48 object-cover" />
 
                   {/* Category & Description */}
                   <div className="p-4">
@@ -144,7 +140,7 @@ const ViewAllPhotos = () => {
                   <div className="flex items-center gap-3 p-4 bg-gray-50 border-t">
                     <img
                       src={userProfile}
-                      alt="User Profile"
+                      alt=""
                       className="w-10 h-10 rounded-full border"
                     />
                     <div className="font-medium">{photo.user?.name}</div>
