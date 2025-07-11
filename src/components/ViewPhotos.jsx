@@ -5,7 +5,7 @@ const ViewPhotos = () => {
   const [photos, setPhotos] = useState([]);
   const [editingPhotoId, setEditingPhotoId] = useState(null);
   const [editDescription, setEditDescription] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState('http://localhost:5000/default-profile-photo.jpg');
+  const [profilePhoto, setProfilePhoto] = useState('https://college-even-backend-2.onrender.com/default-profile-photo.jpg');
   const navigate = useNavigate();
 
   const fetchUserProfile = async () => {
@@ -13,14 +13,14 @@ const ViewPhotos = () => {
     if (!token) return;
 
     try {
-      const res = await fetch('http://localhost:5000/api/users/me', {
+      const res = await fetch('https://college-even-backend-2.onrender.com/api/users/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('Failed to fetch user profile');
       const user = await res.json();
       const photoSrc = user.profilePhoto
-        ? `http://localhost:5000/${user.profilePhoto.replace(/\\/g, '/')}`
-        : 'http://localhost:5000/default-profile-photo.jpg';
+        ? `https://college-even-backend-2.onrender.com/${user.profilePhoto.replace(/\\/g, '/')}`
+        : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
       setProfilePhoto(photoSrc);
     } catch (err) {
       console.error(err);
@@ -32,7 +32,7 @@ const ViewPhotos = () => {
     if (!token) return alert('No token found. Please log in.');
 
     try {
-      const res = await fetch('http://localhost:5000/api/photos/yourPhotos', {
+      const res = await fetch('https://college-even-backend-2.onrender.com/api/photos/yourPhotos', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -50,7 +50,7 @@ const ViewPhotos = () => {
     if (!token) return alert('No token found. Please log in.');
 
     try {
-      await fetch(`http://localhost:5000/api/photos/delete/${photoId}`, {
+      await fetch(`https://college-even-backend-2.onrender.com/api/photos/delete/${photoId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -67,7 +67,7 @@ const ViewPhotos = () => {
     if (!token) return alert('No token found. Please log in.');
 
     try {
-      await fetch(`http://localhost:5000/api/photos/update/${editingPhotoId}`, {
+      await fetch(`https://college-even-backend-2.onrender.com/api/photos/update/${editingPhotoId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const ViewPhotos = () => {
     if (!token) return alert('No token found. Please log in.');
 
     try {
-      await fetch('http://localhost:5000/api/auth/logout', {
+      await fetch('https://college-even-backend-2.onrender.com/api/auth/logout', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -135,7 +135,7 @@ const ViewPhotos = () => {
             <div key={photo._id} className="bg-white rounded shadow p-4">
               <a href={`/photoDetails?id=${photo._id}`}>
                 <img
-                  src={`http://localhost:5000/${photo.url.replace(/\\/g, '/')}`}
+                  src={`https://college-even-backend-2.onrender.com/${photo.url.replace(/\\/g, '/')}`}
                   alt="Uploaded"
                   className="w-full h-48 object-cover rounded"
                 />

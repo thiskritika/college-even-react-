@@ -14,7 +14,7 @@ const Profile = () => {
     if (!token) return redirectToLogin();
 
     try {
-      const res = await axios.get('http://localhost:5000/api/users/me', {
+      const res = await axios.get('https://college-even-backend-2.onrender.com/api/users/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
@@ -30,7 +30,7 @@ const Profile = () => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/auth/logout',
+        'https://college-even-backend-2.onrender.com/api/auth/logout',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -47,7 +47,7 @@ const Profile = () => {
     if (!token) return redirectToLogin();
 
     try {
-      await axios.delete('http://localhost:5000/api/users/profile-photo', {
+      await axios.delete('https://college-even-backend-2.onrender.com/api/users/profile-photo', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser((prev) => ({ ...prev, profilePhoto: null }));
@@ -69,7 +69,7 @@ const Profile = () => {
     formData.append('profilePhoto', file);
 
     try {
-      const res = await axios.put('http://localhost:5000/api/users/profile-photo', formData, {
+      const res = await axios.put('https://college-even-backend-2.onrender.com/api/users/profile-photo', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -90,8 +90,8 @@ const Profile = () => {
   if (!user) return <div className="text-center mt-10 text-lg font-semibold">Loading...</div>;
 
   const profilePhotoSrc = user.profilePhoto
-    ? `http://localhost:5000/${user.profilePhoto.replace(/\\/g, '/')}`
-    : 'http://localhost:5000/default-profile-photo.jpg';
+    ? `https://college-even-backend-2.onrender.com/${user.profilePhoto.replace(/\\/g, '/')}`
+    : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100">

@@ -16,7 +16,7 @@ const PhotoDetails = () => {
 
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:5000/api/photos/${photoId}`, {
+        const res = await axios.get(`https://college-even-backend-2.onrender.com/api/photos/${photoId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -35,10 +35,10 @@ const PhotoDetails = () => {
   if (error) return <div className="max-w-3xl mx-auto p-6 text-red-500">{error}</div>;
   if (!photo) return <div className="max-w-3xl mx-auto p-6">Loading...</div>;
 
-  const photoUrl = photo.url ? `http://localhost:5000/${photo.url.replace(/\\/g, '/')}` : '';
+  const photoUrl = photo.url ? `https://college-even-backend-2.onrender.com/${photo.url.replace(/\\/g, '/')}` : '';
   const profilePhoto = photo.userId?.profilePhoto
-    ? `http://localhost:5000/${photo.userId.profilePhoto.replace(/\\/g, '/')}`
-    : 'http://localhost:5000/default-profile-photo.jpg';
+    ? `https://college-even-backend-2.onrender.com/${photo.userId.profilePhoto.replace(/\\/g, '/')}`
+    : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow mt-8">

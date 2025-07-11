@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'; // Removed unused useRef
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ const UploadPhoto = () => {
   const [photo, setPhoto] = useState(null);
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState('http://localhost:5000/default-profile-photo.jpg');
+  const [profilePhoto, setProfilePhoto] = useState('https://college-even-backend-2.onrender.com/default-profile-photo.jpg');
   const navigate = useNavigate();
 
   const fetchUserProfile = useCallback(async () => {
@@ -14,14 +14,14 @@ const UploadPhoto = () => {
     if (!token) return navigate('/login');
 
     try {
-      const response = await axios.get('http://localhost:5000/api/users/me', {
+      const response = await axios.get('https://college-even-backend-2.onrender.com/api/users/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       const user = response.data;
       const profilePhotoSrc = user.profilePhoto
-        ? `http://localhost:5000/${user.profilePhoto.replace(/\\/g, '/')}`
-        : 'http://localhost:5000/default-profile-photo.jpg';
+        ? `https://college-even-backend-2.onrender.com/${user.profilePhoto.replace(/\\/g, '/')}`
+        : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
       setProfilePhoto(profilePhotoSrc);
     } catch (err) {
       console.error('Error fetching user:', err.message);
@@ -34,7 +34,7 @@ const UploadPhoto = () => {
     if (!token) return navigate('/login');
 
     try {
-      await axios.post('http://localhost:5000/api/auth/logout', {}, {
+      await axios.post('https://college-even-backend-2.onrender.com/api/auth/logout', {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.removeItem('token');
@@ -57,7 +57,7 @@ const UploadPhoto = () => {
     formData.append('description', description);
 
     try {
-      await axios.post('http://localhost:5000/api/photos/upload', formData, {
+      await axios.post('https://college-even-backend-2.onrender.com/api/photos/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ const UploadPhoto = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, [fetchUserProfile]); // Fixed: Added fetchUserProfile to dependency array
+  }, [fetchUserProfile]);
 
   return (
     <div>

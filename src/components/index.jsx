@@ -6,7 +6,7 @@ const ViewPhotos = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/photos/all')
+      .get('https://college-even-backend-2.onrender.com/api/photos/all')
       .then((response) => {
         setPhotos(response.data.photos || []);
       })
@@ -23,7 +23,7 @@ const ViewPhotos = () => {
         {photos.map((photo, index) => {
           const imageUrl = photo.url?.startsWith('http')
             ? photo.url
-            : `http://localhost:5000/${photo.url?.replace(/\\/g, '/')}`;
+            : `https://college-even-backend-2.onrender.com/${photo.url?.replace(/\\/g, '/')}`;
 
           return (
             <div key={index} className="bg-white rounded shadow p-4">

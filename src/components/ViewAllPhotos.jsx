@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ViewAllPhotos = () => {
   const [photos, setPhotos] = useState([]);
-  const [profilePhoto, setProfilePhoto] = useState('http://localhost:5000/default-profile-photo.jpg');
+  const [profilePhoto, setProfilePhoto] = useState('https://college-even-backend-2.onrender.com/default-profile-photo.jpg');
   const navigate = useNavigate();
 
   const redirectToLogin = useCallback(() => {
@@ -16,14 +16,14 @@ const ViewAllPhotos = () => {
     if (!token) return redirectToLogin();
 
     try {
-      const res = await axios.get('http://localhost:5000/api/users/me', {
+      const res = await axios.get('https://college-even-backend-2.onrender.com/api/users/me', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       const user = res.data;
       const photoSrc = user.profilePhoto
-        ? `http://localhost:5000/${user.profilePhoto.replace(/\\/g, '/')}`
-        : 'http://localhost:5000/default-profile-photo.jpg';
+        ? `https://college-even-backend-2.onrender.com/${user.profilePhoto.replace(/\\/g, '/')}`
+        : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
 
       setProfilePhoto(photoSrc);
     } catch (err) {
@@ -37,7 +37,7 @@ const ViewAllPhotos = () => {
     if (!token) return redirectToLogin();
 
     try {
-      const res = await axios.get('http://localhost:5000/api/photos/all', {
+      const res = await axios.get('https://college-even-backend-2.onrender.com/api/photos/all', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -54,7 +54,7 @@ const ViewAllPhotos = () => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/auth/logout',
+        'https://college-even-backend-2.onrender.com/api/auth/logout',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -120,10 +120,10 @@ const ViewAllPhotos = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {photos.map((photo) => {
-            const photoUrl = `http://localhost:5000/${photo.url.replace(/\\/g, '/')}`;
+            const photoUrl = `https://college-even-backend-2.onrender.com/${photo.url.replace(/\\/g, '/')}`;
             const userProfile = photo.user?.profilePhoto
-              ? `http://localhost:5000/${photo.user.profilePhoto.replace(/\\/g, '/')}`
-              : 'http://localhost:5000/default-profile-photo.jpg';
+              ? `https://college-even-backend-2.onrender.com/${photo.user.profilePhoto.replace(/\\/g, '/')}`
+              : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
 
             return (
               <div key={photo._id} className="bg-white rounded shadow overflow-hidden">

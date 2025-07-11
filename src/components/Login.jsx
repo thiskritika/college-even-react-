@@ -11,7 +11,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://college-even-backend-2.onrender.com/api/auth/login', {
         email,
         password,
       });
@@ -29,8 +29,7 @@ const Login = () => {
     if (token) {
       navigate('/dashboard');
     }
-  }, [navigate]); // Fixed: Added navigate to dependency array
-
+  }, [navigate]);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
