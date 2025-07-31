@@ -25,9 +25,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/dashboard');
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        navigate('/dashboard');
+      }
     }
   }, [navigate]);
   return (
