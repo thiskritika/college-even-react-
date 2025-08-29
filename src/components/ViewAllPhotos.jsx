@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation } from 'react-router-dom';
 
 const ViewAllPhotos = () => {
   const [photos, setPhotos] = useState([]);
   const [profilePhoto, setProfilePhoto] = useState('https://college-even-backend-2.onrender.com/default-profile-photo.jpg');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const redirectToLogin = useCallback(() => {
+  if (location.pathname !== '/login') {
     navigate('/login');
-  }, [navigate]);
-
+  }
+}, [navigate, location.pathname]);
   const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) return redirectToLogin();
@@ -28,7 +30,12 @@ const ViewAllPhotos = () => {
       setProfilePhoto(photoSrc);
     } catch (err) {
       console.error('Error fetching user:', err);
-      alert('Failed to load user data.');
+      if (err.response && err.response.status === 403) {
+        localStorage.removeItem("token");
+        redirectToLogin();
+      } else {
+        alert('Failed to load user data.');
+      }
     }
   }, [redirectToLogin]);
 
@@ -44,7 +51,12 @@ const ViewAllPhotos = () => {
       setPhotos(res.data.photos);
     } catch (err) {
       console.error('Error fetching photos:', err);
-      alert('Failed to load photos.');
+      if (err.response && err.response.status === 403) {
+        localStorage.removeItem("token");
+        redirectToLogin();
+      } else {
+        alert('Failed to load photos.');
+      }
     }
   }, [redirectToLogin]);
 
