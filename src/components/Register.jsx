@@ -1,5 +1,5 @@
 // src/components/Register.jsx
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();  
 
     const formData = new FormData();
     formData.append('name', name);
@@ -24,6 +24,8 @@ const Register = () => {
     if (profilePhoto) {
       formData.append('profilePhoto', profilePhoto);
     }
+
+// https://college-even-backend-2.onrender.com
 
     try {
       await axios.post('https://college-even-backend-2.onrender.com/api/auth/register', formData, {

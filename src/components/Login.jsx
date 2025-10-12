@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+   const navigatedRef = useRef(false); // guard
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,21 +18,25 @@ const Login = () => {
       });
 
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Login failed:', error.message);
-      alert('Invalid email or password');
+     if (!navigatedRef.current) {
+        navigatedRef.current = true;
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.error("Login failed:", err.message);
+      alert("Invalid email or password");
     }
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
-      if (token) {
-        navigate('/dashboard');
-      }
+    // run only once on mount
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    if (token && !navigatedRef.current) {
+      navigatedRef.current = true;
+      navigate("/dashboard");
     }
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); //
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
@@ -44,6 +49,7 @@ const Login = () => {
             <input
               type="email"
               id="loginEmail"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -58,6 +64,7 @@ const Login = () => {
             <input
               type="password"
               id="loginPassword"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

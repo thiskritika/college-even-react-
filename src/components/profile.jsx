@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const fileInputRef = useRef();
 
@@ -93,11 +94,49 @@ const Profile = () => {
     ? `https://college-even-backend-2.onrender.com/${user.profilePhoto.replace(/\\/g, '/')}`
     : 'https://college-even-backend-2.onrender.com/default-profile-photo.jpg';
 
+    const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100">
       <header className="bg-blue-500 text-white shadow-md font-bold">
         <nav className="flex justify-between items-center px-6 py-4">
-          <ul className="flex space-x-6 items-center text-sm md:text-base">
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-white focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Desktop menu */}
+          <ul className="hidden md:flex space-x-6 items-center text-sm md:text-base">
             <li>
               <a href="/dashboard" className="flex items-center gap-2 hover:underline">
                 Dashboard
@@ -122,8 +161,57 @@ const Profile = () => {
               </button>
             </li>
           </ul>
+
+          {/* Mobile menu */}
+          {isMenuOpen && (
+            <div className="absolute top-16 left-0 right-0 bg-blue-500 md:hidden shadow-lg">
+              <ul className="flex flex-col space-y-4 p-6 text-sm">
+                <li>
+                  <a 
+                    href="/dashboard" 
+                    className="flex items-center gap-2 hover:underline py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/upload" 
+                    className="flex items-center gap-2 hover:underline py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Upload Photos
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/view" 
+                    className="flex items-center gap-2 hover:underline py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    View Your Photos
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center gap-2 hover:underline py-2 w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </nav>
       </header>
+    
+
+
 
       <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
         <div className="flex flex-col md:flex-row items-center gap-8">
