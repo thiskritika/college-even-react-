@@ -1,5 +1,4 @@
 // // src/components/index.js
-
 // src/components/index.js
 
 import React, { useEffect, useState } from 'react';
@@ -12,6 +11,7 @@ const ViewPhotos = () => {
     axios
       .get('https://college-even-backend-2.onrender.com/api/photos/all')
       .then((response) => {
+        console.log('✅ API Response:', response.data);
         setPhotos(response.data.photos || []);
       })
       .catch((error) => {
@@ -25,19 +25,24 @@ const ViewPhotos = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {photos.map((photo, index) => {
-          // ✅ YEH LINE BILKUL SAHI HAI - Direct Cloudinary URL
-          const imageUrl = photo.url?.startsWith('http')
-            ? photo.url  // ✅ Direct Cloudinary URL: "https://res.cloudinary.com/..."
-            : `https://college-even-backend-2.onrender.com/${photo.url?.replace(/\\/g, '/')}`;
+          // ✅ DIRECT CLOUDINARY URL - NO PREPENDING
+          const imageUrl = photo.url;
+
+          console.log('🖼️ Image URL:', imageUrl); // Debug ke liye
 
           return (
             <div key={index} className="bg-white rounded shadow p-4">
               <img
-                src={imageUrl}  // ✅ Yahi direct Cloudinary URL use ho rahi hai
+                src={imageUrl}  // ✅ Direct Cloudinary URL
                 alt={photo.description || `Photo ${index + 1}`}
                 className="w-full h-48 object-cover rounded mb-2"
+                onError={(e) => {
+                  console.error('❌ Image failed to load:', imageUrl);
+                }}
+                onLoad={() => console.log('✅ Image loaded:', imageUrl)}
               />
               <p className="text-sm text-gray-700">{photo.description}</p>
+              <p className="text-xs text-gray-500 mt-1">Category: {photo.category}</p>
             </div>
           );
         })}
