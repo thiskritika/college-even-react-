@@ -10,6 +10,7 @@ import ViewPhotos from './components/ViewPhotos';
 import PhotoDetails from './components/photoDetails';
 import Profile from './components/profile';
 
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
